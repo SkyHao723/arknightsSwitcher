@@ -80,7 +80,7 @@ void displayBanner() {
     // 打开banner文件
     std::ifstream file("banner.txt");
     if (!file.is_open()) {
-        std::cerr << "无法打开banner.txt文件" << std::endl;
+        std::cerr << "无法打开banner.txt文件，不影响程序正常工作" << std::endl;
         return;
     }
     
@@ -97,15 +97,16 @@ void displayBanner() {
 }
 
 int main() {
-#ifdef _WIN32
+    #ifdef _WIN32
     SetConsoleOutputCP(65001);  // 设置控制台为UTF-8
-#endif
+    #endif
     displayBanner();
     std::string config_path = "config.json";
     Config config = read_config(config_path);
     
     if (config.directory.empty()) {
         std::cout << "未找到有效目录配置，需要用户输入" << std::endl;
+        std::cout << "打开官服或B服启动器，游戏设置——打开文件目录，将此目录复制" << std::endl;
         std::cout << "请输入目标目录路径: ";
         std::getline(std::cin, config.directory);
         write_config(config_path, config);
