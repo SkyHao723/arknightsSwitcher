@@ -15,7 +15,7 @@ std::string read_target_directory() {
     std::string target_dir = "";
     
     while (std::getline(file, line)) {
-        if (line.find("\"last_directory\"") != std::string::npos) {
+        if (line.find("\"directory\"") != std::string::npos) {
             size_t start = line.find('\"', line.find(':') + 1) + 1;
             size_t end = line.rfind('\"');
             if (start != std::string::npos && end != std::string::npos) {
@@ -70,8 +70,8 @@ bool copy_directory_recursive(const std::string& source, const std::string& dest
     return success;
 }
 
-// 复制B2C目录内容到目标目录根目录的函数
-bool copy_b2c_to_root() {
+// 复制C2B目录内容到目标目录根目录的函数
+bool copy_c2b_to_root() {
     std::string target_directory = read_target_directory();
     if (target_directory.empty()) {
         std::cout << "未找到有效的目标目录配置" << std::endl;
@@ -82,13 +82,13 @@ bool copy_b2c_to_root() {
     char current_dir[MAX_PATH];
     GetCurrentDirectoryA(MAX_PATH, current_dir);
     
-    // 构建B2C目录的完整路径
-    std::string b2c_path = std::string(current_dir) + "\\B2C";
+    // 构建C2B目录的完整路径
+    std::string c2b_path = std::string(current_dir) + "\\C2B";
     
-    std::cout << "正在从 " << b2c_path << " 复制到 " << target_directory << std::endl;
+    std::cout << "正在从 " << c2b_path << " 复制到 " << target_directory << std::endl;
     
-    bool result = copy_directory_recursive(b2c_path, target_directory);
-
+    bool result = copy_directory_recursive(c2b_path, target_directory);
+    
     return result;
 }
 
@@ -96,10 +96,9 @@ int main() {
     #ifdef _WIN32
     SetConsoleOutputCP(65001);  // 设置控制台为UTF-8
     #endif
-    std::cout << "开始复制B2C目录内容到目标根目录..." << std::endl;
+    std::cout << "开始复制C2B目录内容到目标根目录..." << std::endl;
 
-    // 执行复制操作（无论成功与否都继续）
-    copy_b2c_to_root();
+    copy_c2b_to_root();
 
     // 复制完成后检查并启动游戏
     std::string target_directory = read_target_directory();

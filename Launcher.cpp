@@ -14,7 +14,7 @@ void create_default_config(const std::string& config_path) {
     std::ofstream file(config_path);
     if (file.is_open()) {
         file << "{\n";
-        file << "    \"last_directory\": \"\"\n";
+        file << "    \"directory\": \"\"\n";
         file << "}";
         file.close();
         std::cout << "已创建默认配置文件: " << config_path << std::endl;
@@ -22,7 +22,7 @@ void create_default_config(const std::string& config_path) {
 }
 
 struct Config {
-    std::string last_directory;
+    std::string directory;
     int removed;
 };
 
@@ -45,14 +45,14 @@ Config read_config(const std::string& config_path) {
     file.close();
     
     // 简单的JSON解析
-    size_t dir_pos = content.find("\"last_directory\"");
+    size_t dir_pos = content.find("\"directory\"");
     if (dir_pos != std::string::npos) {
         size_t colon_pos = content.find(':', dir_pos);
         if (colon_pos != std::string::npos) {
             size_t start_quote = content.find('\"', colon_pos);
             size_t end_quote = content.find('\"', start_quote + 1);
             if (start_quote != std::string::npos && end_quote != std::string::npos) {
-                config.last_directory = content.substr(start_quote + 1, end_quote - start_quote - 1);
+                config.directory = content.substr(start_quote + 1, end_quote - start_quote - 1);
             }
         }
     }
@@ -61,7 +61,7 @@ Config read_config(const std::string& config_path) {
 
 void write_config(const std::string& config_path, const Config& config) {
     // 替换路径中的反斜杠为正斜杠
-    std::string normalized_path = config.last_directory;
+    std::string normalized_path = config.directory;
     for (size_t i = 0; i < normalized_path.length(); ++i) {
         if (normalized_path[i] == '\\') {
             normalized_path[i] = '/';
@@ -71,7 +71,7 @@ void write_config(const std::string& config_path, const Config& config) {
     std::ofstream file(config_path);
     if (file.is_open()) {
         file << "{\n";
-        file << "    \"last_directory\": \"" << normalized_path << "\"\n";
+        file << "    \"directory\": \"" << normalized_path << "\"\n";
         file << "}";
         file.close();
     }
@@ -104,13 +104,13 @@ int main() {
     std::string config_path = "config.json";
     Config config = read_config(config_path);
     
-    if (config.last_directory.empty()) {
+    if (config.directory.empty()) {
         std::cout << "未找到有效目录配置，需要用户输入" << std::endl;
         std::cout << "请输入目标目录路径: ";
-        std::getline(std::cin, config.last_directory);
+        std::getline(std::cin, config.directory);
         write_config(config_path, config);
     } else {
-        std::cout << "使用配置文件中的目录: " << config.last_directory << std::endl;
+        std::cout << "使用配置文件中的目录: " << config.directory << std::endl;
     }
 
     std::cout << "请选择启动方式:" << std::endl;
@@ -123,10 +123,10 @@ int main() {
     
     if (choice == 1) {
         std::cout << "启动官服..." << std::endl;
-        system("launch-witch-C.exe");
+        system("launch-with-C.exe");
     } else if (choice == 2) {
         std::cout << "启动B服..." << std::endl;
-        system("launch-witch-B.exe");
+        system("launch-with-B.exe");
     } else {
         std::cout << "无效选择!" << std::endl;
         return 1;
