@@ -117,7 +117,9 @@ int main() {
     std::cout << "请选择启动方式:" << std::endl;
     std::cout << "1. 官服启动" << std::endl;
     std::cout << "2. B服启动" << std::endl;
-    std::cout << "请输入选择 (1 或 2): ";
+    std::cout << "其他功能:" << std::endl;
+    std::cout << "3. 空格键暂停（更改注册表）" << std::endl;
+    std::cout << "请输入选择 (1, 2 或 3): ";
     
     int choice;
     std::cin >> choice;
@@ -128,6 +130,9 @@ int main() {
     } else if (choice == 2) {
         std::cout << "启动B服..." << std::endl;
         system("launch-with-B.exe");
+    } else if (choice == 3) {
+        std::cout << "更改按键..." << std::endl;
+        system("space-pause.exe");
     } else {
         std::cout << "无效选择!" << std::endl;
         return 1;
