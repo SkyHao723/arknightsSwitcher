@@ -124,10 +124,34 @@ int main() {
     
     if (choice == 1) {
         std::cout << "启动官服..." << std::endl;
-        system("launch-with-C.exe");
+        
+        STARTUPINFOW si = {};
+        PROCESS_INFORMATION pi = {};
+        si.cb = sizeof(si);
+        
+        std::wstring exePath = L"launch-with-C.exe";
+        if (CreateProcessW(NULL, (LPWSTR)exePath.data(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+            WaitForSingleObject(pi.hProcess, INFINITE);
+            CloseHandle(pi.hProcess);
+            CloseHandle(pi.hThread);
+        } else {
+            std::cout << "启动失败，错误代码: " << GetLastError() << std::endl;
+        }
     } else if (choice == 2) {
         std::cout << "启动B服..." << std::endl;
-        system("launch-with-B.exe");
+        
+        STARTUPINFOW si = {};
+        PROCESS_INFORMATION pi = {};
+        si.cb = sizeof(si);
+        
+        std::wstring exePath = L"launch-with-B.exe";
+        if (CreateProcessW(NULL, (LPWSTR)exePath.data(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+            WaitForSingleObject(pi.hProcess, INFINITE);
+            CloseHandle(pi.hProcess);
+            CloseHandle(pi.hThread);
+        } else {
+            std::cout << "启动失败，错误代码: " << GetLastError() << std::endl;
+        }
     } else {
         std::cout << "无效选择!" << std::endl;
         return 1;
