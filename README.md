@@ -1,6 +1,8 @@
 # 明日方舟切换器 (Arknights Switcher)
 
 一个用于在明日方舟官服和B服之间快速切换的工具。
+目前适配游戏版本：V70.0.0
+对应服务器文件下载：https://wwaua.lanzouq.com/ipFfE3ibpdyf
 
 ## 功能特点
 
@@ -16,11 +18,7 @@
 - `Launcher.cpp` - 主启动器程序源码
 - `launch-with-C.cpp` - 官服启动程序源码  
 - `launch-with-B.cpp` - B服启动程序源码
-
-### 可执行文件
-- `Launcher.exe` - 主程序可执行文件
-- `launch-with-C.exe` - 官服启动器可执行文件
-- `launch-with-B.exe` - B服启动器可执行文件
+（下面两个文件编译后可以单独使用，前提是需要有config.json）
 
 ### 配置文件
 - `config.json` - 游戏目录配置文件
@@ -33,20 +31,14 @@
 2. 程序会提示输入明日方舟游戏安装目录
 3. 输入完整路径后按回车确认
 
-### 日常使用
-1. 运行 `Launcher.exe`
-2. 选择启动方式：
-   - 输入 `1` 启动官服
-   - 输入 `2` 启动B服
-3. 程序会自动复制对应文件并启动游戏
-
 ## 目录结构要求
 
 为了正常使用此工具，请确保以下目录结构：
 
 ```
-游戏根目录/
-├── Arknights.exe          # 游戏主程序
+├── Launcher.exe           # 主程序
+├── launch-with-C.exe      # 官服启动程序源码  
+├── launch-with-B.exe      # B服启动程序源码
 ├── C2B/                   # B服专用文件目录
 │   └── [B服相关文件]
 └── B2C/                   # 官服专用文件目录  
