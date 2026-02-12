@@ -18,17 +18,19 @@
 - `Launcher.exe` - 主启动器程序
 - `launch-with-C.exe` - 官服启动程序  
 - `launch-with-B.exe` - B服启动程序
--（下面两个文件可以单独使用，前提是需要有config.json）
+- （下面两个文件可以单独使用，前提是需要有config.json）
 
 ### 配置文件
 - `config.json` - 游戏目录配置文件
-- `banner.txt` - 启动时显示的欢迎横幅
+- `banner.txt` - 启动页面（非必须，只是好看）
 
 ### 文件结构
 ```
-├── Launcher.exe           # 主程序
-├── launch-with-C.exe      # 官服启动程序  
-├── launch-with-B.exe      # B服启动程序
+├── Launcher.exe
+├── launch-with-C.exe
+├── launch-with-B.exe
+├── config.json
+├── banner.txt
 ├── C2B/                   # B服专用文件目录
 │   └── [B服相关文件]
 └── B2C/                   # 官服专用文件目录  
